@@ -1,8 +1,6 @@
 package aiss.GitLabMiner.Tests;
 
-import aiss.GitLabMiner.Models.Comment;
-import aiss.GitLabMiner.Models.Commit;
-import aiss.GitLabMiner.Services.CommitsService;
+import aiss.GitLabMiner.services.CommitsService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
