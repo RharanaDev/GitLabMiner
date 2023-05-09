@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/comments")
+/*@RestController
+@RequestMapping("/api/comments")*/
 public class CommentController {
-
+/*
     private final CommentRepository repository;
 
     public CommentController(CommentRepository repository) {
@@ -36,7 +36,7 @@ public class CommentController {
     @GetMapping("/{issue}")
     public List<Comment> getIssuesComments(@PathVariable Issue issue){
         return repository.getIssuesComments(issue);
-    }
+    }*/
 
 
 }

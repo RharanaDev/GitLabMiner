@@ -1,35 +1,23 @@
 package aiss.GitLabMiner.repositories;
 
 import aiss.GitLabMiner.models.Comment;
-import aiss.GitLabMiner.models.Issue;
+import org.springframework.http.*;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.web.client.RestTemplate;
 
 @Repository
 public class CommentRepository {
-
-    List<Comment> comments = new ArrayList<>();
-
-    public CommentRepository(){
-
-    }
-
-    public List<Comment> findAll(){ return comments; }
-
-    public Comment findOne(String id){
-        return comments.stream()
-                .filter(comment -> comment.getId().equals(id))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public List<Comment> getIssuesComments (Issue issue){
-        return comments.stream()
-                .filter(comment -> comment.getIssue().equals(issue))
-                .collect(Collectors.toList());
+    public final String API_TOKEN = "glpat-UByBki6qeqekMyVbkpCx";
+    public final String API_URL = "https://gitlab.com/api/v4/projects/";
+    public Comment[] fetchGitLab(String projectId, String issueId) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer " + API_TOKEN);
+        String url = API_URL + projectId + "/issues/" + issueId + "/notes";
+        HttpEntity<String> entity = new HttpEntity<String>(url,headers);
+        ResponseEntity<Comment[]> comments = restTemplate.exchange(url, HttpMethod.GET, entity, Comment[].class);
+        return comments.getBody();
     }
 
 }

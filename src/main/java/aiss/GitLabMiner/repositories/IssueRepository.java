@@ -1,39 +1,22 @@
 package aiss.GitLabMiner.repositories;
-
 import aiss.GitLabMiner.models.Issue;
+import org.springframework.http.*;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.web.client.RestTemplate;
 
 @Repository
 public class IssueRepository {
-
-    List<Issue> issues = new ArrayList<>();
-
-    public IssueRepository(){
-
+    public final String API_TOKEN = "glpat-UByBki6qeqekMyVbkpCx";
+    public final String API_URL = "https://gitlab.com/api/v4/projects/";
+    public Issue[] fetchGitLab(String id) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer " + API_TOKEN);
+        String url = API_URL + id + "/issues";
+        HttpEntity<String> entity = new HttpEntity<String>(url,headers);
+        ResponseEntity<Issue[]> issues = restTemplate.exchange(url, HttpMethod.GET, entity, Issue[].class);
+        return issues.getBody();
     }
 
-    public List<Issue> findAll(){ return issues; }
-
-    public Issue findOne(String id){
-        return issues.stream()
-                .filter(issue -> issue.getId().equals(id))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public List<Issue> findAllIssuesByAuthorId(String authorId){
-        return issues.stream()
-                .filter(issue -> issue.getAuthor().getId().equals(authorId))
-                .collect(Collectors.toList());
-    }
-
-    public List<Issue> findAllIssuesByState(String state){
-        return issues.stream()
-                .filter(issue -> issue.getState().equals(state))
-                .collect(Collectors.toList());
-    }
 }

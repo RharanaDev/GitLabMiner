@@ -28,17 +28,16 @@ public class Issue {
     public List<String> labels;
     @JsonProperty("author")
     public User author;
+    @JsonProperty("assignees")
+    public List<User> assignees;
     @JsonProperty("upvotes")
     public Integer upvotes;
     @JsonProperty("downvotes")
     public Integer downvotes;
-    @JsonProperty("project")
-    public Project project;
-    @JsonProperty("project")
-    public List<Comment> comments;
 
+    public Issue() {}
 
-    public Issue(Integer id, Integer ref_id, String title, String description, String state, String createdAt, String updatedAt, String closedAt, List<String> labels, User author, Integer upvotes, Integer downvotes, Project project, List<Comment> comments) {
+    public Issue(Integer id, Integer ref_id, String title, String description, String state, String createdAt, String updatedAt, String closedAt, List<String> labels, User author, List<User> assignees, Integer upvotes, Integer downvotes) {
         this.id = id;
         this.ref_id = ref_id;
         this.title = title;
@@ -49,123 +48,9 @@ public class Issue {
         this.closedAt = closedAt;
         this.labels = labels;
         this.author = author;
+        this.assignees = assignees;
         this.upvotes = upvotes;
         this.downvotes = downvotes;
-        this.project = project;
-        this.comments = comments;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getRef_id() {
-        return ref_id;
-    }
-
-    public void setRef_id(Integer ref_id) {
-        this.ref_id = ref_id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public String getClosedAt() {
-        return closedAt;
-    }
-
-    public void setClosedAt(String closedAt) {
-        this.closedAt = closedAt;
-    }
-
-    public List<String> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(List<String> labels) {
-        this.labels = labels;
-    }
-
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
-    public Integer getUpvotes() {
-        return upvotes;
-    }
-
-    public void setUpvotes(Integer upvotes) {
-        this.upvotes = upvotes;
-    }
-
-    public Integer getDownvotes() {
-        return downvotes;
-    }
-
-    public void setDownvotes(Integer downvotes) {
-        this.downvotes = downvotes;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 
     @Override
@@ -183,8 +68,6 @@ public class Issue {
                 ", author=" + author +
                 ", upvotes=" + upvotes +
                 ", downvotes=" + downvotes +
-                ", project=" + project +
-                ", comments=" + comments +
                 '}';
     }
 }

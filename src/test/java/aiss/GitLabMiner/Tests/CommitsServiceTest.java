@@ -1,5 +1,6 @@
 package aiss.GitLabMiner.Tests;
 
+import aiss.GitLabMiner.models.Commit;
 import aiss.GitLabMiner.services.CommitsService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

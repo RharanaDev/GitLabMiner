@@ -1,38 +1,22 @@
 package aiss.GitLabMiner.repositories;
 
 import aiss.GitLabMiner.models.Project;
+import org.springframework.http.*;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import org.springframework.web.client.RestTemplate;
 
 @Repository
-public class ProjectRepository {
-
-    List<Project> projects = new ArrayList<>();
-
-    public ProjectRepository(){
-
-    }
-
-    public List<Project> findAll(){ return projects; }
-
-    public Project findOne(String id){
-        return projects.stream()
-                .filter(project -> project.getId().equals(id))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public Project create(Project project) {
-        Project newProject = new Project(
-                UUID.randomUUID().toString(),
-                project.getName(),
-                project.getWebUrl(),
-                project.getCommits(),
-                project.getIssues());
-        projects.add(newProject);
-        return newProject;
+public class ProjectRepository{
+    public final String API_TOKEN = "glpat-UByBki6qeqekMyVbkpCx";
+    public final String API_URL = "https://gitlab.com/api/v4/projects/";
+    public Project fetchGitLab(String id) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer " + API_TOKEN);
+        String url = API_URL + id;
+        HttpEntity<String> entity = new HttpEntity<String>(url,headers);
+        ResponseEntity<Project> project = restTemplate.exchange(url, HttpMethod.GET, entity, Project.class);
+        return project.getBody();
     }
 }

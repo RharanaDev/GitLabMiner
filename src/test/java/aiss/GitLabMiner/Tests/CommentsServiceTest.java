@@ -1,5 +1,6 @@
 package aiss.GitLabMiner.Tests;
 
+import aiss.GitLabMiner.models.Comment;
 import aiss.GitLabMiner.services.CommentsService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
