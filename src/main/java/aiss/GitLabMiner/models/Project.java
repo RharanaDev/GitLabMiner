@@ -13,6 +13,10 @@ public class Project {
     public String name;
     @JsonProperty("web_url")
     public String webUrl;
+    @JsonProperty("issues")
+    public Issue[] issues;
+    @JsonProperty("commits")
+    public Commit[] commits;
 
     public Project() {}
 
@@ -22,16 +26,12 @@ public class Project {
         this.webUrl = webUrl;
     }
 
-    public String getId() {
-        return id;
+    public void setIssues(Issue[] issues) {
+        this.issues = issues;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getWebUrl() {
-        return webUrl;
+    public void setCommits(Commit[] commits) {
+        this.commits = commits;
     }
 
     @Override

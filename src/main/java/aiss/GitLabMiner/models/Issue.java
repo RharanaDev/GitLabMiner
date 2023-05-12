@@ -10,7 +10,7 @@ public class Issue {
 
     @JsonProperty("id")
     public Integer id;
-    @JsonProperty("ref_id")
+    @JsonProperty("iid")
     public Integer ref_id;
     @JsonProperty("title")
     public String title;
@@ -34,6 +34,8 @@ public class Issue {
     public Integer upvotes;
     @JsonProperty("downvotes")
     public Integer downvotes;
+    @JsonProperty("comments")
+    public Comment[] comments;
 
     public Issue() {}
 
@@ -69,5 +71,13 @@ public class Issue {
                 ", upvotes=" + upvotes +
                 ", downvotes=" + downvotes +
                 '}';
+    }
+
+    public void setComments(Comment[] comments) {
+        this.comments = comments;
+    }
+
+    public Integer getRef_id() {
+        return ref_id;
     }
 }
